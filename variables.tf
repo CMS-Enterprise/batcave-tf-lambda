@@ -14,3 +14,5 @@ variable "policy_name" {}
 variable "cloudwatch_name" {}
 variable "role_name" {}
 variable "path_to_layer" {}
+variable "project" {}
+variable "environment" {}
