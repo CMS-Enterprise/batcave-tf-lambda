@@ -13,5 +13,4 @@ variable "permissions_boundary" {}
 variable "policy_name" {}
 variable "cloudwatch_name" {}
 variable "role_name" {}
-variable "project" {}
-variable "environment" {}
+variable "path_to_layer" {}
