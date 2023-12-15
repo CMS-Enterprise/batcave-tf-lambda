@@ -11,20 +11,20 @@ This module is the template for spinning up lambda function resources. This docu
 
 ## Procedural
 
-This module work in conjunction with the `batcave-landing-zone` repository. Currently, it is only limited to the `infra/batcave/dev/lambda` but once it is validated, it can be rolled out to the other environments. 
+This module work in conjunction with the `batcave-landing-zone` repository.
 
-1. From cloudtamer, get the batcave-dev's aws short-term credentials. It will export the following environmental variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `export AWS_SESSION_TOKEN`
-2. Run `aws eks update-kubeconfig --name batcave-dev --region us-east-1`
-3. Go to the batcave-dev lambda directory using `cd <path to blz>/batcave-landing-zone/infra/batcave/dev/lambda` 
+1. From cloudtamer, get the {project}-{environment}'s aws short-term credentials. It will export the following environmental variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `export AWS_SESSION_TOKEN`
+2. Run `aws eks update-kubeconfig --name {project}-{environment} --region us-east-1`
+3. Go to the `project-environment lambda` directory using `cd <path to blz>/batcave-landing-zone/infra/{project}/{environment}/lambda` 
 4. Duplicate the `test` folder and rename it 
 5. Make the necessary changes to suit your needs (Refer to the What you will need to Change section)
 7. Run `terragrunt plan` to see the resources that will spin up. [1]
 8. Once you confirm `terragrunt plan` has no errors, you can run `terragrunt apply`. [2]
-9. Logging into the batcave-dev AWS account, you can verify the proper resources were created. 
+9. Logging into the {project}-{environment} AWS account, you can verify the proper resources were created. 
 
-[1] The following resources should spin up Lambda Function, Cloudwatch Log Group, Cloudwatch Event Rule, IAM Role, IAM Policy, and any other resources you decided to add through the `<path to blz>/batcave-landing-zone/infra/batcave/dev/lambda/terragrunt.hcl` `local` section. 
+[1] The following resources should spin up Lambda Function, @TODO ADD (Cloudwatch Log Group, Cloudwatch Event Rule, IAM Role, IAM Policy, and any other resources) you decided to add through the `<path to blz>/batcave-landing-zone/infra/batcave/dev/lambda/terragrunt.hcl` `local` section. 
 
-[2] A common error that may show up when running `terragrunt apply` is the resource that you are trying to spin up is already there. Therefore, you will need to delete the resource through the batcave-dev AWS account GUI.
+[2] A common error that may show up when running `terragrunt apply` is the resource that you are trying to spin up is already there. Therefore, you will need to delete the resource through the {project}-{environment} AWS account GUI.
 
 ## What you will need to Change
 
