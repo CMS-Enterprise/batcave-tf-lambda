@@ -13,6 +13,14 @@ variable "permissions_boundary" {}
 variable "policy_name" {}
 variable "cloudwatch_name" {}
 variable "role_name" {}
-variable "path_to_layer" {}
+variable "path_to_layer" {
+    type    = list(string)
+    default = []
+
+}
 variable "project" {}
 variable "environment" {}
+variable "environment_variables" {
+    type    = map(string)
+    default = {}
+}

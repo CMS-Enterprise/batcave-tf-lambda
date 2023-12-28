@@ -8,12 +8,13 @@ resource "aws_lambda_function" "lambda_function" {
   source_code_hash = filebase64sha256(var.path_to_zip)      # Path to the Lambda deployment
 
   # Environment variables in key = value format
-  # environment {
-  #   variables = {
-  #     KEY_1 = "VALUE_1"
-  #     KEY_2 = "VALUE_2"
-  #   }
-  # }
+  environment {
+    variables = {
+      for key, value in var.environment_variables :
+      key => value
+    }
+  }
+  
   vpc_config {
     security_group_ids = [aws_security_group.lambda.id]
     subnet_ids         = data.aws_subnets.private.ids
