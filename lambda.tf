@@ -19,7 +19,13 @@ resource "aws_lambda_function" "lambda_function" {
     subnet_ids         = data.aws_subnets.private.ids
   }
 
-  layers = [aws_lambda_layer_version.lambda_layer.arn]
+  dynamic "layers" {
+    for_each = aws_lambda_layer_version.lambda_layer[*].arn
+    content {
+      arn = layers.value
+    }
+  }
+
 }
 
 # Creates the CloudWatch resources for scheduling of the Lambda Function and Logs
