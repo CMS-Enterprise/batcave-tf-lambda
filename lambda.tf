@@ -73,9 +73,8 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {
-  layer_name = "requests"
-
-  filename  = var.path_to_layer
-
+  count               = var.path_to_layer == "" ? 0 : 1
+  layer_name          = "requests"
+  filename            = var.path_to_layer
   compatible_runtimes = ["python3.9"]
 }
