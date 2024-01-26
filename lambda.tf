@@ -19,12 +19,7 @@ resource "aws_lambda_function" "lambda_function" {
     subnet_ids         = data.aws_subnets.private.ids
   }
 
-  dynamic "layers" {
-    for_each = aws_lambda_layer_version.lambda_layer[*].arn
-    content {
-      arn = layers.value
-    }
-  }
+  layers = var.path_to_layer != "" ? [aws_lambda_layer_version.lambda_layer[0].arn] : []
 
 }
 
