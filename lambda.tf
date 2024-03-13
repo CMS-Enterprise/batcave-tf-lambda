@@ -19,7 +19,8 @@ resource "aws_lambda_function" "lambda_function" {
     subnet_ids         = data.aws_subnets.private.ids
   }
 
-  layers = [aws_lambda_layer_version.lambda_layer.arn]
+  layers = var.path_to_layer != "" ? [aws_lambda_layer_version.lambda_layer[0].arn] : []
+
 }
 
 # Creates the CloudWatch resources for scheduling of the Lambda Function and Logs
@@ -72,9 +73,8 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {
-  layer_name = "requests"
-
-  filename  = var.path_to_layer
-
+  count               = var.path_to_layer == "" ? 0 : 1
+  layer_name          = "requests"
+  filename            = var.path_to_layer
   compatible_runtimes = ["python3.9"]
 }
