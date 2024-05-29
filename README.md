@@ -29,14 +29,29 @@ This module work in conjunction with the `batcave-landing-zone` repository.
 
 ## What you will need to Change
 
- 1. Replace the contents of the `python` folder will the new zip file of
-    the lambda function's source code.
+1. Under the `python` directory, zip your lambda function's source code.
+- Make sure the name of the zip is `lambda_function.zip`
 2. Inside of the `terragrunt.hcl`'s `locals` section, replace the variables.
 
 - `function_name`, `cloudwatch_name`, `role_name`, and `policy_name` are the names of the following AWS resources respectively Lambda Function, Cloudwatch Rule, IAM Role, IAM Policy
 - `event_schedule_cron` is the cron expression of how frequent the lambda function will be run. Refer to the following documentation for assistance https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents-expressions.html
 - `log_retention` refers to the number of days the logs will be kept 
 - `access_policy` will be the contents of the IAM Policy. This will denote what permissions the lambda function will have in relation to the other aws resources (For example, read/write permissions to an S3 bucket)
+
+3. Check if your lambda function requires a lambda layer.
+- If your lambda function requires external libraries that are not prepackaged in AWS Lambda, you will need to create a lambda layer for it. Here is a link of how to create one for Beautiful Soup [Note: Steps will slightly vary depending on the version and library]
+2. If a lambda layer is required, zip up the relevant files (similar to zipping up your lambda function\s source code)
+- Make sure the name of the zip is `python.zip`
+
+The resulting folder structure
+- <project> Ex. ispg
+  - <environment> Ex. np
+    - lambda
+      - <name of your new lambda function> Ex. ping_sonar
+        - python
+          - lambda_function.zip
+          - python.zip (if a lambda layer is required)
+        - terragrunt.hcl
 
 ## Technical
 
