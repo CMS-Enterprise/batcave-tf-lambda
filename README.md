@@ -44,10 +44,10 @@ This module work in conjunction with the `batcave-landing-zone` repository.
 - Make sure the name of the zip is `python.zip`
 
 The resulting folder structure
-- <project> Ex. ispg
-  - <environment> Ex. np
+- {project} Ex. ispg
+  - {environment} Ex. np
     - lambda
-      - <name of your new lambda function> Ex. ping_sonar
+      - {name of your new lambda function} Ex. ping_sonar
         - python
           - lambda_function.zip
           - python.zip (if a lambda layer is required)
